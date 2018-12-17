@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace AlienMaker
 {
     public class Part : MonoBehaviour
     {
         public GameObject connected;
-
+        public Text text;
         public Manager.Type typ;
         public Manager.Type[] connectables;
         public HashSet<Part> connectedParts = new HashSet<Part>();
@@ -55,16 +55,12 @@ namespace AlienMaker
             }
         }
 
-        // Use this for initialization
         void Start()
         {
             connectionStateChanged();
         }
 
-        // Update is called once per frame
         void Update()
-        {
-
-        }
+        {}
     }
 }

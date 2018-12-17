@@ -20,22 +20,34 @@ namespace AlienMaker
 
         public void playOpen()
         {
-            audioSource.PlayOneShot(open, 0.7F);
+            if (!audioSource.isPlaying)
+            {
+                audioSource.PlayOneShot(open, 0.7F);
+            }
         }
 
         public void playSuccess()
         {
-            audioSource.PlayOneShot(success, 0.7F);
+            if (!audioSource.isPlaying)
+            {
+                audioSource.PlayOneShot(success, 0.7F);
+            }
         }
 
         public void playError()
         {
-            audioSource.PlayOneShot(error, 0.7F);
+            if (!audioSource.isPlaying)
+            {
+                audioSource.PlayOneShot(error, 0.7F);
+            }
         }
 
         public void playTap()
         {
-            audioSource.PlayOneShot(tap, 0.7F);
+            if (!audioSource.isPlaying)
+            {
+                audioSource.PlayOneShot(tap, 0.7F);
+            }
         }
     }
 }
