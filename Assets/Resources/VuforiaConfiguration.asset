@@ -19,7 +19,7 @@ MonoBehaviour:
     maxSimultaneousImageTargets: 15
     maxSimultaneousObjectTargets: 1
     useDelayedLoadingObjectTargets: 0
-    cameraDirection: 2
+    cameraDirection: 0
     mirrorVideoBackground: 0
   digitalEyewear:
     cameraOffset: 0.06
