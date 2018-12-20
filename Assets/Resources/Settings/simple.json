@@ -1,0 +1,16 @@
+{
+    "id": 0,
+    "name": "Einfache Aufgabe",
+    "tasks": [
+        {
+            "mode": "task",
+            "oder": 1,
+            "group": "green",
+            "dataset": "VuforiaMars_Images",
+            "heads": 1,
+            "arms": 2,
+            "legs": 2,
+            "torso": 1
+        }
+    ]
+}

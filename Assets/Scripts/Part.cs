@@ -9,6 +9,7 @@ namespace AlienMaker
     {
         public GameObject connected;
         public Text text;
+        public string group;
         public Manager.Type typ;
         public Manager.Type[] connectables;
         public HashSet<Part> connectedParts = new HashSet<Part>();
