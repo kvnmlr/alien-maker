@@ -1,15 +1,15 @@
 {
     "id": 0,
-    "name": "Einfache Aufgabe",
+    "name": "Testaufgabe",
     "tasks": [
         {
             "mode": "task",
             "oder": 1,
             "group": "green",
             "dataset": "alien-maker",
-            "heads": 1,
-            "arms": 2,
-            "legs": 2,
+            "heads": 0,
+            "arms": 1,
+            "legs": 1,
             "torso": 1
         }
     ]

@@ -14,6 +14,11 @@ namespace AlienMaker
             public int id;
             public string mode;
             public List<Task> tasks;
+
+            public override string ToString()
+            {
+                return name + " (" + id + "), mode: " + mode;
+            }
         }
 
         [Serializable]
@@ -26,6 +31,11 @@ namespace AlienMaker
             public int arms;
             public int legs;
             public int torso;
+
+            public override string ToString()
+            {
+                return "Order: " + order + ", Group: " + group + ", Dataset: " + dataset + ", Heads: " + heads + ", Arms: " + arms + ", Legs: " + legs + ", Torso: " + torso;
+            }
         }
 
         public List<GameSetup> setups = new List<GameSetup>();

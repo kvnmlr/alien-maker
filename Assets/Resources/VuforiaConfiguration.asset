@@ -44,9 +44,9 @@ MonoBehaviour:
       ContainsMagnet: 0
   databaseLoad:
     dataSetsToLoad:
-    - VuforiaMars_Images
+    - alien-maker
     dataSetsToActivate:
-    - VuforiaMars_Images
+    - alien-maker
   videoBackground:
     clippingMode: 0
     numDivisions: 2

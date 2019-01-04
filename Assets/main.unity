@@ -314,7 +314,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: AstronautMaterial
+  m_Name: arm2Material
   m_Shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -327,7 +327,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 77fb44a366db5cb41b8c06649271f8e6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0d4e2955256d41b99390406f99a0c741, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats: []
@@ -460,7 +460,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &370161362
 RectTransform:
   m_ObjectHideFlags: 0
@@ -547,10 +547,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 510008603}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0979, y: 0.0714912, z: -0.031426832}
-  m_LocalScale: {x: 0.12065, y: 0.12065, z: 0.12065}
+  m_LocalPosition: {x: 1.021, y: 0.0714912, z: -0.031426832}
+  m_LocalScale: {x: 1.126263, y: 1.126263, z: 1.126263}
   m_Children:
   - {fileID: 997775022}
+  - {fileID: 972140171}
   m_Father: {fileID: 1731788922}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -628,15 +629,15 @@ MonoBehaviour:
   m_Script: {fileID: -1631628248, guid: bab6fa851cf5a1a4bba3cec5f191cb8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mTrackableName: Drone
+  mTrackableName: rumpf2
   mPreserveChildSize: 0
   mInitializedInEditor: 1
-  mDataSetPath: Vuforia/VuforiaMars_Images.xml
+  mDataSetPath: Vuforia/alien-maker.xml
   mExtendedTracking: 0
-  mAspectRatio: 1.7272727
+  mAspectRatio: 1.126263
   mImageTargetType: 0
-  mWidth: 0.06985
-  mHeight: 0.12065
+  mWidth: 1
+  mHeight: 1.126263
 --- !u!114 &510008610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1044,6 +1045,79 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 954687330}
+--- !u!1 &972140170
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 972140171}
+  - component: {fileID: 972140173}
+  - component: {fileID: 972140172}
+  m_Layer: 0
+  m_Name: Camera
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &972140171
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 972140170}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 1.459, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 510008604}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!124 &972140172
+Behaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 972140170}
+  m_Enabled: 1
+--- !u!20 &972140173
+Camera:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 972140170}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
 --- !u!1 &997775021
 GameObject:
   m_ObjectHideFlags: 0
@@ -1789,8 +1863,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1332813334}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.019814918, y: 0.0714912, z: -0.031426832}
-  m_LocalScale: {x: 0.12065, y: 0.12065, z: 0.12065}
+  m_LocalPosition: {x: 2.277, y: 0.0714912, z: -0.031426832}
+  m_LocalScale: {x: 1.07565, y: 1.07565, z: 1.07565}
   m_Children:
   - {fileID: 913004198}
   m_Father: {fileID: 1731788922}
@@ -1870,15 +1944,15 @@ MonoBehaviour:
   m_Script: {fileID: -1631628248, guid: bab6fa851cf5a1a4bba3cec5f191cb8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mTrackableName: Fissure
+  mTrackableName: bein2
   mPreserveChildSize: 0
   mInitializedInEditor: 1
-  mDataSetPath: Vuforia/VuforiaMars_Images.xml
+  mDataSetPath: Vuforia/alien-maker.xml
   mExtendedTracking: 0
-  mAspectRatio: 1.7272727
+  mAspectRatio: 1.07565
   mImageTargetType: 0
-  mWidth: 0.06985
-  mHeight: 0.12065
+  mWidth: 1
+  mHeight: 1.07565
 --- !u!114 &1332813341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2076,6 +2150,10 @@ MonoBehaviour:
   - {fileID: 1716890280}
   - {fileID: 510008610}
   - {fileID: 1332813341}
+  menuUI: {fileID: 726106680}
+  taskUI: {fileID: 370161361}
+  menuKey: 109
+  taskKey: 116
 --- !u!82 &1387851239
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2201,7 +2279,7 @@ GameObject:
   - component: {fileID: 1716890282}
   - component: {fileID: 1716890283}
   m_Layer: 0
-  m_Name: Head
+  m_Name: LeftArm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2281,15 +2359,15 @@ MonoBehaviour:
   m_Script: {fileID: -1631628248, guid: bab6fa851cf5a1a4bba3cec5f191cb8e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mTrackableName: Astronaut
+  mTrackableName: arm2
   mPreserveChildSize: 0
   mInitializedInEditor: 1
-  mDataSetPath: Vuforia/VuforiaMars_Images.xml
+  mDataSetPath: Vuforia/alien-maker.xml
   mExtendedTracking: 0
-  mAspectRatio: 1.7272727
+  mAspectRatio: 1.198294
   mImageTargetType: 0
-  mWidth: 0.06985
-  mHeight: 0.12065
+  mWidth: 1
+  mHeight: 1.198294
 --- !u!4 &1716890279
 Transform:
   m_ObjectHideFlags: 0
@@ -2298,7 +2376,7 @@ Transform:
   m_GameObject: {fileID: 1716890273}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.1758, y: 0.0714912, z: -0.031426832}
-  m_LocalScale: {x: 0.12065, y: 0.12065, z: 0.12065}
+  m_LocalScale: {x: 1.198294, y: 1.198294, z: 1.198294}
   m_Children:
   - {fileID: 1281501747}
   - {fileID: 195302655}
@@ -2319,7 +2397,7 @@ MonoBehaviour:
   connected: {fileID: 195302654}
   text: {fileID: 1035452010}
   group: green
-  typ: 0
+  typ: 1
   connectables: 03000000
 --- !u!114 &1716890281
 MonoBehaviour:
@@ -2592,7 +2670,7 @@ Mesh:
     vertexCount: 4
     localAABB:
       m_Center: {x: 0, y: 0, z: 0}
-      m_Extent: {x: 0.28947368, y: 0, z: 0.5}
+      m_Extent: {x: 0.41725984, y: 0, z: 0.5}
   m_Shapes:
     vertices: []
     shapes: []
@@ -2645,7 +2723,7 @@ Mesh:
       format: 0
       dimension: 0
     m_DataSize: 128
-    _typelessdata: e53594be00000000000000bf000000000000803f000000000000000000000000e53594be000000000000003f000000000000803f00000000000000000000803fe535943e00000000000000bf000000000000803f000000000000803f00000000e535943e000000000000003f000000000000803f000000000000803f0000803f
+    _typelessdata: 15a3d5be00000000000000bf00000000ffff7f3f00000000000000000000000015a3d5be000000000000003f00000000ffff7f3f00000000000000000000803f15a3d53e00000000000000bf00000000ffff7f3f000000000000803f0000000015a3d53e000000000000003f00000000ffff7f3f000000000000803f0000803f
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -2994,7 +3072,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mWorldCenterMode: 2
-  mWorldCenter: {fileID: 0}
+  mWorldCenter: {fileID: 510008609}
 --- !u!81 &2099311214
 AudioListener:
   m_ObjectHideFlags: 0

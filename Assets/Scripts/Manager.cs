@@ -19,6 +19,14 @@ namespace AlienMaker
         // List of all available parts, assigned in Unity Editor
         public Part[] parts;
 
+        public Menu menuUI;
+
+        public GameObject taskUI;
+
+        public KeyCode menuKey = KeyCode.M;
+
+        public KeyCode taskKey = KeyCode.T;
+
         // List of parts that are needed for the current task
         private List<Part> activeParts = new List<Part>();
 
@@ -186,6 +194,7 @@ namespace AlienMaker
                 }
             }
 
+            Debug.Log("Next Task: " + currentTask.ToString());
             Debug.Log(activeParts.Count + " active parts");
         }
 
@@ -207,9 +216,12 @@ namespace AlienMaker
                 return;
             }
 
+            Debug.Log(setup.ToString() + " now runnung");
+
+            menuUI.gameObject.SetActive(false);
+            taskUI.gameObject.SetActive(false);
             finishedTasks = 0;
             nextTask();
-            Debug.Log(setup.name + " now runnung");
         }
 
         private string takeScreenshot()
@@ -232,6 +244,21 @@ namespace AlienMaker
             foreach (Part p in trackedParts)
             {
                 Debug.Log(p.gameObject.name);
+            }
+        }
+
+        public void Update()
+        {
+            if (Input.GetKeyDown(menuKey))
+            {
+                menuUI.gameObject.SetActive(!menuUI.gameObject.activeSelf);
+                Debug.Log("Show Menu");
+            }
+
+            if (Input.GetKeyDown(taskKey))
+            {
+                taskUI.gameObject.SetActive(!taskUI.gameObject.activeSelf);
+                Debug.Log("Show Task");
             }
         }
     }
