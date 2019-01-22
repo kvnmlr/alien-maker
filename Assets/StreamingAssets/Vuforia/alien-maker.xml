@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
   <Tracking>
-    <ImageTarget name="rumpf2" size="1.000000 1.126263" />
-    <ImageTarget name="bein2" size="1.000000 1.075650" />
-    <ImageTarget name="arm2" size="1.000000 1.198294" />
+    <ImageTarget name="bein4" size="1.000000 1.620360" />
+    <ImageTarget name="horn3" size="1.000000 1.776316" />
+    <ImageTarget name="monster1" size="1.000000 1.171031" />
+    <ImageTarget name="bein3" size="1.000000 1.537511" />
+    <ImageTarget name="bein1" size="1.000000 1.740466" />
+    <ImageTarget name="bein2" size="1.000000 1.620360" />
+    <ImageTarget name="horn1" size="1.000000 3.518124" />
+    <ImageTarget name="horn2" size="1.000000 1.776316" />
+    <ImageTarget name="monster2" size="1.000000 1.528043" />
+    <ImageTarget name="monster3" size="1.000000 1.364700" />
   </Tracking>
 </QCARConfig>

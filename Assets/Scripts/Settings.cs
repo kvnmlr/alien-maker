@@ -43,16 +43,31 @@ namespace AlienMaker
         // Use this for initialization
         void Start()
         {
-            string path = "Assets/Resources/Settings";
-
-            DirectoryInfo dir = new DirectoryInfo(path);
-            FileInfo[] info = dir.GetFiles("*.json");
-            foreach (FileInfo f in info)
+            string path = "";
+#if UNITY_ANDROID	
+            path = path = "jar:file://" + Application.dataPath + "!/assets";
+#endif
+#if UNITY_EDITOR
+            path = Application.streamingAssetsPath + "/ad";
+#endif
+            try
             {
-                string text = File.ReadAllText(f.FullName);
+                DirectoryInfo dir = new DirectoryInfo(path);
+                FileInfo[] info = dir.GetFiles("*.json");
+                foreach (FileInfo f in info)
+                {
+                    string text = File.ReadAllText(f.FullName);
+                    GameSetup setup = JsonUtility.FromJson<GameSetup>(text);
+                    setups.Add(setup);
+                }
+            }
+            catch (Exception e) {
+                Debug.Log("Path does not exist, taking hardcoded example");
+                string text = "{\"id\":0,\"name\":\"Testaufgabe\",\"tasks\":[{\"mode\":\"task\",\"oder\":1,\"dataset\":\"alien-maker\",\"heads\":0,\"arms\":1,\"legs\":1,\"torso\":1}]}";
                 GameSetup setup = JsonUtility.FromJson<GameSetup>(text);
                 setups.Add(setup);
             }
+            
 
             Menu.Instance.initializeButtons();
         }

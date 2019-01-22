@@ -5,7 +5,6 @@
         {
             "mode": "task",
             "oder": 1,
-            "group": "green",
             "dataset": "alien-maker",
             "heads": 0,
             "arms": 1,

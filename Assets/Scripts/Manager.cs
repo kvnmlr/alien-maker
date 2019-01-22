@@ -151,6 +151,7 @@ namespace AlienMaker
         /* Starts the next unfinished task from the current setup */
         private void nextTask()
         {
+            Debug.Log("Next task: " + (finishedTasks + 1) + " / " + setup.tasks.Count);
             if (setup.tasks.Count > finishedTasks)
             {
                 currentTask = setup.tasks[finishedTasks];
@@ -160,7 +161,7 @@ namespace AlienMaker
                 activeParts = new List<Part>();
                 foreach (Part part in parts)
                 {
-                    if (part.group.Equals(group))
+                    if (true || part.group.Equals(group))
                     {
                         activeParts.Add(part);
                     }
@@ -192,10 +193,13 @@ namespace AlienMaker
                         Debug.Log(ds.Path + " deactivated");
                     }
                 }
+                Debug.Log("Next Task: " + currentTask.ToString());
+                Debug.Log(activeParts.Count + " active parts");
+            } else
+            {
+                menuUI.gameObject.SetActive(true);
+                taskUI.gameObject.SetActive(true);
             }
-
-            Debug.Log("Next Task: " + currentTask.ToString());
-            Debug.Log(activeParts.Count + " active parts");
         }
 
         /* Loads a game setup with the given id and starts the first task from it */
