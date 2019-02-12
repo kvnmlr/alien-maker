@@ -3,7 +3,7 @@
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
@@ -13,14 +13,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vuforia:
     vuforiaLicenseKey: AZET3Mb/////AAABmWpbkmbER0lUmCfKcKfcdPwPFl01mvg4H3ZzPW9j8NRUTxx3ro0O1IAXfe0KhZF8cpE0gxMyxCZsVxQijWiz1Sr1Khja9uhrbKuJPz9vEBz+cJbaNdz2p7vAMNqcEzyMqXqsROfrfDjdMozXOeavm2Hm06xVPfA2O8zD7phDyd7A/TyrPQO/tbyMDwT/T1LGMKAaiO9iGZm3zGDzFS55STin90uNyHM0+fcsgXpztOqIClogQLcTUg5TaSaLwt0IGmxw7cO3LXG+I86pS2f3/cgdt/DYNf8D18gOdaRKlAxBIzJfJWMidenGiLnxpgoeBVrWVkEHagxTIF3k9c8MhHfcLXDBVElM72F/efHXIQQN
-    ufoLicenseKey: QVpoVDlDRC8vLy8vQUFBQUtKYnpNNENlUmt4bnVObm9aOCtNbm54OFkyZFFhMnNvRHlWOWlhQjJhNWVOQVRSNVR5Q2tXOTZ5Mk1wZUYwMVN2bmdEaDVhVGFLNmQreE5QaFJOclR2REFObWZoYjJ2TmhqUFZMcjVxOE92MzkrUzVGQ0tJNGQvR0trQ0g2M1dFNEFuVTlrTVhoSHVLSnpzSWszRkNUMXg5MlBRZEQ2dWNmeXcvVW5zc3RLL2ZOOU9UZE5GSDVqS1RDVlAyVG5zTnp5cDEzYmNPZ0k3aEJNZGY3bGhHVFUrQVErTXo1c250RGF3Snp6SHNBTDdjRFdnWGhCVCtLQ0pGMFpya2N5OS9ZbFhCY1Z3VWRsZTJkNFlmelI3M1o5T0x6eVlFSWRhRlltVW02MVFYY2xoT1JaMUIxR3NBWWl4alV3cDFIYUFWQ1o5SlBzZW9MazI2a09LcmhKMEloTVVxN3dYZ0FSUHVBc2gyNlNZRlZIR3E=
+    ufoLicenseKey: QWZwejVSZi8vLy8vQUFBQUtPTXRYS0YvTTBPcG5GTTMwdmhZRjJRcjVQa0ZRNTZiSlpIeERpdHJwQlFUeUtoMkdpUWJ3YkdlTGtPQ2lTYjB5bXhVbzJrZ1RYZUlSSFdyNmUwbnk0VlpBdnhiMmt2dFN6K3phMEdGR1I1Vmw2aE5ieFBLQ0RPOThadFVLTTJ6MHZWTG1rNDBjZERkR251U2hnb2pHb3RDRGN4WDlVOWY5VHRnWU5jUXpNZHovam80eXlZMHJ5TUcrNjR5bHVFWVNNeXBxRVVCckdYK1MyZXlXMEk1ZS9CR0NTTVNNdHFNZFYwY05wajJYeGtOSlBYcGY4N2J4K2ZFMS91WE5wQlJNTHBXbDRJazU4QmJqSzIrQjQ2clBxUUJ1WGJqV0NCR2Y3ZHZDcnNqZ0ZaQXNQdVAzbHp2TVJUVVJuU2R0OWhoa1V4cXJZbDREY3RQYnlWSnhSTzdKV0RJRlZiSVd2WUNXcExZd2QvVzJtSnM=
     delayedInitialization: 0
     cameraDeviceModeSetting: -1
-    maxSimultaneousImageTargets: 15
+    maxSimultaneousImageTargets: 10
     maxSimultaneousObjectTargets: 1
     useDelayedLoadingObjectTargets: 0
     cameraDirection: 0
     mirrorVideoBackground: 0
+    version: 7.2.23
   digitalEyewear:
     cameraOffset: 0.06
     distortionRenderingLayer: 31
@@ -42,11 +43,6 @@ MonoBehaviour:
       DistortionCoefficients: {x: 0, y: 0}
       FieldOfView: {x: 0, y: 0, z: 0, w: 0}
       ContainsMagnet: 0
-  databaseLoad:
-    dataSetsToLoad:
-    - alien-maker
-    dataSetsToActivate:
-    - alien-maker
   videoBackground:
     clippingMode: 0
     numDivisions: 2
@@ -57,11 +53,12 @@ MonoBehaviour:
   deviceTracker:
     autoInitTracker: 0
     autoStartTracker: 0
-    trackingMode: 0
+    trackingMode: 1
     posePrediction: 0
     modelCorrectionMode: 0
     modelTransformEnabled: 0
     modelTransform: {x: 0, y: 0.1, z: -0.1}
+    fusionMode: 7
   smartTerrain:
     autoInitTracker: 0
     autoStartTracker: 0

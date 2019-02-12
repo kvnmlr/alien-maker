@@ -33,14 +33,15 @@ namespace AlienMaker
                 newStatus == TrackableBehaviour.Status.EXTENDED_TRACKED)
             {
                 Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
-                Manager.Instance.registerTrackedTarget(gameObject.GetComponent<Part>());
+                Manager.Instance.registerTrackedTarget(GetComponent<Part>());
 
             }
             else if (previousStatus == TrackableBehaviour.Status.TRACKED &&
-                     newStatus == TrackableBehaviour.Status.NOT_FOUND)
+                     newStatus == TrackableBehaviour.Status.NO_POSE)
             {
                 Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
-                Manager.Instance.unregisterTrackedTarget(gameObject.GetComponent<Part>());
+                GetComponent<Part>().connectedParts = new System.Collections.Generic.HashSet<Part>();
+                Manager.Instance.unregisterTrackedTarget(GetComponent<Part>());
             }
             else
             {

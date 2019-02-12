@@ -1,0 +1,47 @@
+{
+    "id": 2,
+    "name": "Schwer",
+    "audio": "intro",
+    "tasks": [
+        {
+            "audio": "t3p1",
+            "mode": "task",
+            "oder": 1,
+            "dataset": "alien-maker",
+            "horns": 0,
+            "arms": 0,
+            "legs": 0,
+            "torso": 1
+        },
+        {
+            "audio": "t3p2",
+            "mode": "task",
+            "oder": 2,
+            "dataset": "alien-maker",
+            "horns": 0,
+            "arms": 0,
+            "legs": 4,
+            "torso": 1
+        },
+        {
+            "audio": "t3p3",
+            "mode": "task",
+            "oder": 3,
+            "dataset": "alien-maker",
+            "horns": 0,
+            "arms": 5,
+            "legs": 4,
+            "torso": 1
+        },
+        {
+            "audio": "t3p4",
+            "mode": "task",
+            "oder": 4,
+            "dataset": "alien-maker",
+            "horns": 3,
+            "arms": 5,
+            "legs": 4,
+            "torso": 1
+        }
+    ]
+}

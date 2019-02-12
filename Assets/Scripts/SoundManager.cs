@@ -9,13 +9,22 @@ namespace AlienMaker
         public AudioClip open;
         public AudioClip error;
         public AudioClip success;
-        public AudioClip tap;
+        public AudioClip[] spitze;
+
 
         AudioSource audioSource;
 
         void Start()
         {
             audioSource = GetComponent<AudioSource>();
+        }
+
+        public void playFile(string filename)
+        {
+            Debug.Log(filename);
+            AudioClip clip = (AudioClip)Resources.Load(filename);
+            audioSource.clip = clip;
+            audioSource.Play();
         }
 
         public void playOpen()
@@ -42,11 +51,13 @@ namespace AlienMaker
             }
         }
 
-        public void playTap()
+        public void playSpitze()
         {
+            AudioClip clip = spitze[(int)Mathf.Floor(Random.Range(0, spitze.Length - 1))];
             if (!audioSource.isPlaying)
             {
-                audioSource.PlayOneShot(tap, 0.7F);
+                audioSource.clip = clip;
+                audioSource.Play();
             }
         }
     }

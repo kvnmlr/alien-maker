@@ -10,6 +10,7 @@ namespace AlienMaker
         [Serializable]
         public class GameSetup
         {
+            public string audio;
             public string name;
             public int id;
             public string mode;
@@ -25,16 +26,16 @@ namespace AlienMaker
         public class Task
         {
             public int order;
-            public string group;
+            public string audio;
             public string dataset;
-            public int heads;
+            public int horns;
             public int arms;
             public int legs;
             public int torso;
 
             public override string ToString()
             {
-                return "Order: " + order + ", Group: " + group + ", Dataset: " + dataset + ", Heads: " + heads + ", Arms: " + arms + ", Legs: " + legs + ", Torso: " + torso;
+                return "Order: " + order + ", Dataset: " + dataset + ", Horns: " + horns + ", Arms: " + arms + ", Legs: " + legs + ", Torso: " + torso;
             }
         }
 
@@ -43,13 +44,8 @@ namespace AlienMaker
         // Use this for initialization
         void Start()
         {
-            string path = "";
-#if UNITY_ANDROID	
-            path = path = "jar:file://" + Application.dataPath + "!/assets";
-#endif
-#if UNITY_EDITOR
-            path = Application.streamingAssetsPath + "/ad";
-#endif
+            string path = Application.streamingAssetsPath;
+
             try
             {
                 DirectoryInfo dir = new DirectoryInfo(path);
@@ -61,7 +57,7 @@ namespace AlienMaker
                     setups.Add(setup);
                 }
             }
-            catch (Exception e) {
+            catch (Exception) {
                 Debug.Log("Path does not exist, taking hardcoded example");
                 string text = "{\"id\":0,\"name\":\"Testaufgabe\",\"tasks\":[{\"mode\":\"task\",\"oder\":1,\"dataset\":\"alien-maker\",\"heads\":0,\"arms\":1,\"legs\":1,\"torso\":1}]}";
                 GameSetup setup = JsonUtility.FromJson<GameSetup>(text);
