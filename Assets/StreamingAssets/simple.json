@@ -5,7 +5,7 @@
     "tasks": [
         {
             "audio": "t1p1",
-            "mode": "task",
+            "mode": "free",
             "oder": 1,
             "dataset": "alien-maker",
             "horns": 0,
@@ -15,32 +15,32 @@
         },
         {
             "audio": "t1p2",
-            "mode": "task",
+            "mode": "free",
             "oder": 2,
             "dataset": "alien-maker",
             "horns": 0,
             "arms": 0,
-            "legs": 2,
+            "legs": 1,
             "torso": 1
         },
         {
             "audio": "t1p3",
-            "mode": "task",
+            "mode": "free",
             "oder": 3,
             "dataset": "alien-maker",
             "horns": 0,
-            "arms": 2,
-            "legs": 2,
+            "arms": 1,
+            "legs": 1,
             "torso": 1
         },
         {
             "audio": "t1p4",
-            "mode": "task",
+            "mode": "free",
             "oder": 4,
             "dataset": "alien-maker",
-            "horns": 2,
-            "arms": 2,
-            "legs": 2,
+            "horns": 1,
+            "arms": 1,
+            "legs": 1,
             "torso": 1
         }
     ]

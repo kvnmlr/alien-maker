@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 5f7347d1b2284d2b9ecb9237bcb0216c
+guid: 25a5a75c5e694e8aa23e715c234636d1
 TextureImporter:
   fileIDToRecycleName: {}
   externalObjects: {}
@@ -63,7 +63,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0

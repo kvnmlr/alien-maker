@@ -1,0 +1,17 @@
+{
+    "id": 3,
+    "name": "Test",
+    "audio": "intro",
+    "tasks": [
+        {
+            "audio": "t1p1",
+            "mode": "task",
+            "oder": 1,
+            "dataset": "alien-maker",
+            "horns": 0,
+            "arms": 0,
+            "legs": 0,
+            "torso": 1
+        }
+    ]
+}

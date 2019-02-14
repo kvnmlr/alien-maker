@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <QCARConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="qcar_config.xsd">
   <Tracking>
+    <ImageTarget name="arm2_alt" size="1.000000 1.796364" />
+    <ImageTarget name="arm2" size="1.000000 1.870909" />
     <ImageTarget name="horn1_mirror_alt" size="1.000000 1.190909" />
     <ImageTarget name="horn1_mirror" size="1.000000 1.190909" />
     <ImageTarget name="horn3_alt" size="1.000000 1.680000" />

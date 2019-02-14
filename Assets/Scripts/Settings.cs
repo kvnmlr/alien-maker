@@ -32,6 +32,7 @@ namespace AlienMaker
             public int arms;
             public int legs;
             public int torso;
+            public string mode;
 
             public override string ToString()
             {
