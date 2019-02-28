@@ -84,7 +84,15 @@ namespace AlienMaker
         /* Removes a part from the list of currently tracked parts */
         public void unregisterTrackedTarget(Part part)
         {
+            Debug.Log("Unregister " + part.name);
             trackedParts.Remove(part);
+            foreach(Part p in parts)
+            {
+                Debug.Log("connected to " + p.name);
+                p.connectedParts.Remove(part);
+            }
+            part.connectedParts = new HashSet<Part>();
+
             //printTrackedObjects();
             connectionStateChanged();
         }
@@ -92,13 +100,12 @@ namespace AlienMaker
         /* Callback when two parts are successfully connected */
         public void connectionStateChanged()
         {
-            Debug.Log("connectionStateChanged");
             if (setup == null || currentTask == null)
             {
                 return;
             }
 
-            if (isSolution())
+            if (isSolution() && !currentSetupFinished)
             {
                 Debug.Log("Finished");
                 finishedTasks++;
@@ -111,7 +118,7 @@ namespace AlienMaker
         {
             if (!arCamera.activeSelf)
             {
-                Debug.Log("AR Camera is not active, not checking for solution");
+                //Debug.Log("AR Camera is not active, not checking for solution");
                 return false;
             }
             Debug.Log("Tracked: " + trackedParts.Count);
@@ -247,6 +254,7 @@ namespace AlienMaker
                 connectionStateChanged(); 
             } else
             {
+                currentSetupFinished = true;
                 StartCoroutine(SetupFinished());
             }
         }
@@ -327,7 +335,6 @@ namespace AlienMaker
         {
             yield return new WaitForSeconds(5);
             Debug.Log("Current setup is finished!");
-            currentSetupFinished = true;
 
             arCamera.SetActive(false);
             trackedParts = new HashSet<Part>();
@@ -340,15 +347,13 @@ namespace AlienMaker
                 component.enabled = true;
 
             float i = 0;
-            Debug.Log("CON P: " + connectedParts.Count);
             foreach (Part part in parts)
             {
                 if (connectedParts.Contains(part))
                 {
-                    i += 0.3f;
-                    Debug.Log(i);
                     if (part.typ == Type.Arm)
                     {
+                        i += 0.3f;
                         Animation anim = part.transform.GetChild(0).GetChild(0).GetComponent<Animation>();
                         StartCoroutine(WaveAnimation(anim, i));
                     }
