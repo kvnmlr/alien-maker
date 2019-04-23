@@ -144,21 +144,23 @@ namespace AlienMaker
 
                     foreach (Part connected in part.connectedParts)
                     {
-                        connectedParts.Add(connected);
-                        if (connected.typ.Equals(Type.Horn))
+                        if (connected.typ.Equals(Type.Horn) && currentTask.horns > countHorns)
                         {
                             Debug.Log("Horns in solution");
                             countHorns++;
+                            connectedParts.Add(connected);
                         }
-                        if (connected.typ.Equals(Type.Arm))
+                        if (connected.typ.Equals(Type.Arm) && currentTask.arms > countArms)
                         {
                             Debug.Log("Arms in solution");
                             countArms++;
+                            connectedParts.Add(connected);
                         }
-                        if (connected.typ.Equals(Type.Leg))
+                        if (connected.typ.Equals(Type.Leg) && currentTask.legs > countLegs)
                         {
                             Debug.Log("Legs in solution");
                             countLegs++;
+                            connectedParts.Add(connected);
                         }
                     }
                 }
@@ -216,6 +218,8 @@ namespace AlienMaker
         private void nextTask()
         {
             Debug.Log("Next task: " + (finishedTasks + 1) + " / " + setup.tasks.Count);
+            connectedPartsMax = 0;
+
             if (setup.tasks.Count > finishedTasks)
             {
                 currentTask = setup.tasks[finishedTasks];
