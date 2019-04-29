@@ -57,10 +57,8 @@ namespace AlienMaker
 
             if (Input.GetKeyUp(KeyCode.Return))
             {
-                if (!Manager.Instance.currentSetupFinished)
-                {
-                    Manager.Instance.startGame(setups[currentSelected].id);
-                }
+                Debug.Log(Manager.Instance.currentSetupFinished);
+                Manager.Instance.startGame(setups[currentSelected].id);
             }
         }
 

@@ -69,7 +69,14 @@ namespace AlienMaker
 
         private int connectedPartsMax = 0;
 
-        public bool currentSetupFinished = false;
+        public bool currentSetupFinished = true;
+
+        public bool currentGameSetup = false;
+
+        private IEnumerator example;
+        private IEnumerator setupFinished;
+        private IEnumerator waveAnimation;
+        private IEnumerator flyAnimation;
 
 
 
@@ -77,23 +84,18 @@ namespace AlienMaker
         public void registerTrackedTarget(Part part)
         {
             trackedParts.Add(part);
-            //printTrackedObjects();
             connectionStateChanged();
         }
 
         /* Removes a part from the list of currently tracked parts */
         public void unregisterTrackedTarget(Part part)
         {
-            Debug.Log("Unregister " + part.name);
             trackedParts.Remove(part);
             foreach(Part p in parts)
             {
-                Debug.Log("connected to " + p.name);
                 p.connectedParts.Remove(part);
             }
             part.connectedParts = new HashSet<Part>();
-
-            //printTrackedObjects();
             connectionStateChanged();
         }
 
@@ -181,8 +183,6 @@ namespace AlienMaker
                 connectedPartsMax = connectedParts.Count;
             }
 
-            Debug.Log("Count Legs: " + countLegs);
-
             // Check if connected parts match current task
             bool isSolution = true;
 
@@ -193,8 +193,8 @@ namespace AlienMaker
                 (countArms != currentTask.arms && currentTask.arms > 0) ||
                 (countLegs != currentTask.legs && currentTask.legs > 0))
                 {
-                    Debug.Log(countTorso + "," + countHorns + "," + countArms + "," + countLegs + ",");
-                    Debug.Log(currentTask.torso + "," + currentTask.horns + "," + currentTask.arms + "," + currentTask.legs + ",");
+                    //Debug.Log(countTorso + "," + countHorns + "," + countArms + "," + countLegs + ",");
+                    //Debug.Log(currentTask.torso + "," + currentTask.horns + "," + currentTask.arms + "," + currentTask.legs + ",");
                     isSolution = false;
                 }
             } else
@@ -204,13 +204,13 @@ namespace AlienMaker
                 (countArms < currentTask.arms && currentTask.arms > 0) ||
                 (countLegs < currentTask.legs && currentTask.legs > 0))
                 {
-                    Debug.Log(countTorso + "," + countHorns + "," + countArms + "," + countLegs + ",");
-                    Debug.Log(currentTask.torso + "," + currentTask.horns + "," + currentTask.arms + "," + currentTask.legs + ",");
+                    //Debug.Log(countTorso + "," + countHorns + "," + countArms + "," + countLegs + ",");
+                    //Debug.Log(currentTask.torso + "," + currentTask.horns + "," + currentTask.arms + "," + currentTask.legs + ",");
                     isSolution = false;
                 }
             }
-            
 
+            Debug.Log(isSolution);
             return isSolution;
         }
 
@@ -259,7 +259,8 @@ namespace AlienMaker
             } else
             {
                 currentSetupFinished = true;
-                StartCoroutine(SetupFinished());
+                setupFinished = SetupFinished();
+                StartCoroutine(setupFinished);
             }
         }
 
@@ -267,12 +268,14 @@ namespace AlienMaker
         /* Loads a game setup with the given id and starts the first task from it */
         public void startGame(int id)
         {
+            Debug.Log("Start game");
             regularCamera.SetActive(false);
             this.setup = null;
             currentTask = null;
             connectedPartsMax = 0;
             currentSetupFinished = false;
             arCamera.SetActive(false);
+            currentGameSetup = false;
 
             foreach (Part p in parts) {
                 p.gameObject.SetActive(true);
@@ -313,11 +316,17 @@ namespace AlienMaker
 
             finishedTasks = 0;
             liloJump.Play(0);
-            StartCoroutine(Example());
+            example = Example();
+            StartCoroutine(example);
         }
 
         private IEnumerator Example()
         {
+            foreach (Part p in parts)
+            {
+                p.showColored(false);
+            }
+
             yield return new WaitForSeconds(1);
             trackedParts = new HashSet<Part>();
             connectedParts = new HashSet<Part>();
@@ -328,6 +337,7 @@ namespace AlienMaker
             ScreenshotCamera.SetActive(false);
             download.gameObject.SetActive(false);
             arCamera.SetActive(true);
+            currentGameSetup = true;
             yield return new WaitForSeconds(3);
 
             SoundManager.Instance.playFile("Sounds/" + setup.audio);
@@ -359,7 +369,8 @@ namespace AlienMaker
                     {
                         i += 0.3f;
                         Animation anim = part.transform.GetChild(0).GetChild(0).GetComponent<Animation>();
-                        StartCoroutine(WaveAnimation(anim, i));
+                        waveAnimation = WaveAnimation(anim, i);
+                        StartCoroutine(waveAnimation);
                     }
                 }
                 else
@@ -370,11 +381,13 @@ namespace AlienMaker
             }
             if (i > 0)
             {
-                StartCoroutine(FlyAnimation(i + 4.5f));
+                flyAnimation = FlyAnimation(i + 4.5f);
+                StartCoroutine(flyAnimation);
             }
             else
             {
-                StartCoroutine(FlyAnimation(0));
+                flyAnimation = FlyAnimation(0);
+                StartCoroutine(flyAnimation);
             }
         }
 
@@ -383,6 +396,8 @@ namespace AlienMaker
             yield return new WaitForSeconds(wait);
             anim.Play();
         }
+
+
 
         private IEnumerator FlyAnimation(float wait)
         {
@@ -397,19 +412,27 @@ namespace AlienMaker
                 p.showColored(false);
             }
             yield return new WaitForSeconds(0.1f);
-            takeScreenshot();
+            StartCoroutine(takeScreenshot());
         }
 
-        private string takeScreenshot()
+        private IEnumerator takeScreenshot()
         {
             Debug.Log("Take Screenshot");
 
-            System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
-            int currentTime = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
-            string filename = Application.persistentDataPath + "/" + currentTime + ".png";
-            //ScreenCapture.CaptureScreenshot(filename);
+            System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc).ToLocalTime();
+            //int currentTime = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
+
+            String currentTime = DateTime.UtcNow.ToShortTimeString().Replace(':', '.');
+            String currentDate = DateTime.UtcNow.ToShortDateString();
+
+            string filename = Application.persistentDataPath + "/" + currentDate + ' ' + currentTime + ".png";
+            Debug.Log("Saving screenshot in: " + filename);
+
+            yield return new WaitForEndOfFrame();
+            ScreenCapture.CaptureScreenshot(filename);
 
             Debug.Log("Screen Width : " + Screen.width);
+            yield return new WaitForEndOfFrame();
             int width = Screen.width;
             int height = Screen.height;
             Texture2D tex = new Texture2D(width, height, TextureFormat.RGB24, false);
@@ -419,8 +442,7 @@ namespace AlienMaker
             tex.Apply();
 
             StartCoroutine(uploadScreenshot(System.Convert.ToBase64String(tex.EncodeToJPG(100))));
-
-            return filename;
+            Destroy(tex);
         }
 
         IEnumerator uploadScreenshot(string bytes)
@@ -493,14 +515,40 @@ namespace AlienMaker
         public void Update()
         {
             Screen.SetResolution(1920, 1080, true);
-            if (Input.GetKeyUp(KeyCode.Return))
+            if (Input.GetKeyUp(KeyCode.Return) && currentGameSetup)
             {
-                if (currentSetupFinished) {
-                    currentSetupFinished = false;
-                    menuUI.gameObject.SetActive(true);
-                    taskUI.gameObject.SetActive(true);
+                Debug.Log("Stop current game");
+                currentGameSetup = false;
+                currentSetupFinished = true;
+                menuUI.gameObject.SetActive(true);
+                taskUI.gameObject.SetActive(true);
+                SoundManager.Instance.stop();
+                if (example != null)
+                {
+                    StopCoroutine(example);
+                }
+
+                if (setupFinished != null)
+                {
+                    StopCoroutine(setupFinished);
+                }
+                
+                if (waveAnimation != null)
+                {
+                    StopCoroutine(waveAnimation);
+
+                }
+                if (flyAnimation != null)
+                {
+                    StopCoroutine(flyAnimation);
+
                 }
             }
+        }
+
+        public void OnApplicationQuit()
+        {
+            Debug.Log("Application ending after " + Time.time + " seconds");
         }
     }
 }

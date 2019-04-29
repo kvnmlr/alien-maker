@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using UnityEngine;
 
 public class SpeakByVolume : MonoBehaviour {
@@ -76,7 +75,7 @@ public class SpeakByVolume : MonoBehaviour {
                 mouthClosed.SetActive(true);
                 mouthOpen.SetActive(false);
             }
-        } 
+        }
     }
     #endregion
 }

@@ -19,10 +19,16 @@ namespace AlienMaker
             audioSource = GetComponent<AudioSource>();
         }
 
+        public void stop()
+        {
+            audioSource.Stop();
+        }
+
         public void playFile(string filename)
         {
             Debug.Log(filename);
             AudioClip clip = (AudioClip)Resources.Load(filename);
+            audioSource.Stop();
             audioSource.clip = clip;
             audioSource.Play();
         }
@@ -31,7 +37,8 @@ namespace AlienMaker
         {
             if (!audioSource.isPlaying)
             {
-                audioSource.PlayOneShot(open, 0.7F);
+                audioSource.clip = open;
+                audioSource.Play();
             }
         }
 
@@ -39,7 +46,8 @@ namespace AlienMaker
         {
             if (!audioSource.isPlaying)
             {
-                audioSource.PlayOneShot(success, 0.7F);
+                audioSource.clip = success;
+                audioSource.Play();
             }
         }
 
@@ -47,7 +55,8 @@ namespace AlienMaker
         {
             if (!audioSource.isPlaying)
             {
-                audioSource.PlayOneShot(error, 0.7F);
+                audioSource.clip = error;
+                audioSource.Play();
             }
         }
 
