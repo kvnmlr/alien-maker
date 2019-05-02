@@ -8,13 +8,13 @@ using Vuforia;
 namespace AlienMaker
 {
     [Serializable]
-    public class IMGUR
+    public class UploadResult
     {
-        public Data data; 
+        public ResultData data; 
     }
 
     [Serializable]
-    public class Data
+    public class ResultData
     {
         public string id;
     }
@@ -78,8 +78,6 @@ namespace AlienMaker
         private IEnumerator waveAnimation;
         private IEnumerator flyAnimation;
 
-
-
         /* Adds a new part to the list of currently tracked parts */
         public void registerTrackedTarget(Part part)
         {
@@ -109,7 +107,6 @@ namespace AlienMaker
 
             if (isSolution() && !currentSetupFinished)
             {
-                Debug.Log("Finished");
                 finishedTasks++;
                 nextTask();
             }         
@@ -140,7 +137,6 @@ namespace AlienMaker
             {
                 if (part.typ == Type.Torso)
                 {
-                    Debug.Log("Torso in solution");
                     connectedParts.Add(part);
                     countTorso++;
 
@@ -148,19 +144,16 @@ namespace AlienMaker
                     {
                         if (connected.typ.Equals(Type.Horn) && currentTask.horns > countHorns)
                         {
-                            Debug.Log("Horns in solution");
                             countHorns++;
                             connectedParts.Add(connected);
                         }
                         if (connected.typ.Equals(Type.Arm) && currentTask.arms > countArms)
                         {
-                            Debug.Log("Arms in solution");
                             countArms++;
                             connectedParts.Add(connected);
                         }
                         if (connected.typ.Equals(Type.Leg) && currentTask.legs > countLegs)
                         {
-                            Debug.Log("Legs in solution");
                             countLegs++;
                             connectedParts.Add(connected);
                         }
@@ -209,20 +202,17 @@ namespace AlienMaker
                     isSolution = false;
                 }
             }
-
-            Debug.Log(isSolution);
             return isSolution;
         }
 
         /* Starts the next unfinished task from the current setup */
         private void nextTask()
         {
-            Debug.Log("Next task: " + (finishedTasks + 1) + " / " + setup.tasks.Count);
             connectedPartsMax = 0;
-
             if (setup.tasks.Count > finishedTasks)
             {
                 currentTask = setup.tasks[finishedTasks];
+                Debug.Log("Next task: " + (finishedTasks + 1) + " / " + setup.tasks.Count);
 
                 // Disable all Vuforia datasets except the one needed for the current task
                 string dataset = currentTask.dataset;
@@ -263,7 +253,6 @@ namespace AlienMaker
                 StartCoroutine(setupFinished);
             }
         }
-
 
         /* Loads a game setup with the given id and starts the first task from it */
         public void startGame(int id)
@@ -316,11 +305,11 @@ namespace AlienMaker
 
             finishedTasks = 0;
             liloJump.Play(0);
-            example = Example();
+            example = PrepareScene();
             StartCoroutine(example);
         }
 
-        private IEnumerator Example()
+        private IEnumerator PrepareScene()
         {
             foreach (Part p in parts)
             {
@@ -397,8 +386,6 @@ namespace AlienMaker
             anim.Play();
         }
 
-
-
         private IEnumerator FlyAnimation(float wait)
         {
             yield return new WaitForSeconds(wait);
@@ -412,18 +399,15 @@ namespace AlienMaker
                 p.showColored(false);
             }
             yield return new WaitForSeconds(0.1f);
-            StartCoroutine(takeScreenshot());
+            StartCoroutine(TakeScreenshot());
         }
 
-        private IEnumerator takeScreenshot()
+        private IEnumerator TakeScreenshot()
         {
-            Debug.Log("Take Screenshot");
-
             System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc).ToLocalTime();
-            //int currentTime = (int)(System.DateTime.UtcNow - epochStart).TotalSeconds;
 
-            String currentTime = DateTime.UtcNow.ToShortTimeString().Replace(':', '.');
-            String currentDate = DateTime.UtcNow.ToShortDateString();
+            string currentTime = DateTime.UtcNow.ToShortTimeString().Replace(':', '.');
+            string currentDate = DateTime.UtcNow.ToShortDateString();
 
             string filename = Application.persistentDataPath + "/" + currentDate + ' ' + currentTime + ".png";
             Debug.Log("Saving screenshot in: " + filename);
@@ -431,7 +415,6 @@ namespace AlienMaker
             yield return new WaitForEndOfFrame();
             ScreenCapture.CaptureScreenshot(filename);
 
-            Debug.Log("Screen Width : " + Screen.width);
             yield return new WaitForEndOfFrame();
             int width = Screen.width;
             int height = Screen.height;
@@ -441,13 +424,13 @@ namespace AlienMaker
             tex.ReadPixels(new Rect(0, 0, width, height), 0, 0);
             tex.Apply();
 
-            StartCoroutine(uploadScreenshot(System.Convert.ToBase64String(tex.EncodeToJPG(100))));
+            StartCoroutine(UploadScreenshot(System.Convert.ToBase64String(tex.EncodeToJPG(100))));
             Destroy(tex);
         }
 
-        IEnumerator uploadScreenshot(string bytes)
+        private IEnumerator UploadScreenshot(string bytes)
         {
-            Debug.Log("Upload Screenshot");
+            Debug.Log("Uploading Screenshot...");
 
             Dictionary<string, string> headers = new Dictionary<string, string>();
             headers.Add("Authorization", "Client-ID 2d8ec31a4c08811");
@@ -460,21 +443,15 @@ namespace AlienMaker
 
             WWW www = new WWW(url, rawData, headers);
             yield return www;
+            Debug.Log("Result:\n" + www.text);
 
-            Debug.Log("WWW Result: ");
-            Debug.Log(www.text);
-
-            IMGUR myObject = JsonUtility.FromJson<IMGUR>(www.text);
-
+            UploadResult myObject = JsonUtility.FromJson<UploadResult>(www.text);
             string id = myObject.data.id;
             string imageURL = "https://imgur.com/" + id;
-            Debug.Log("url: " + imageURL);
-
             StartCoroutine(GetTexture(imageURL, id));
-
         }
 
-        IEnumerator GetTexture(string imageURL, string id)
+        private IEnumerator GetTexture(string imageURL, string id)
         {
             UnityWebRequest www = UnityWebRequestTexture.GetTexture("https://api.qrserver.com/v1/create-qr-code/?color=000&margin=10&size=150x150&data=" + imageURL);
             yield return www.SendWebRequest();
@@ -501,9 +478,7 @@ namespace AlienMaker
             }
         }
 
-
-
-        private void printTrackedObjects()
+        private void PrintTrackedObjects()
         {
             Debug.Log("Tracked: ");
             foreach (Part p in trackedParts)
@@ -521,6 +496,7 @@ namespace AlienMaker
                 currentGameSetup = false;
                 currentSetupFinished = true;
                 menuUI.gameObject.SetActive(true);
+                menuUI.ResetSeletion();
                 taskUI.gameObject.SetActive(true);
                 SoundManager.Instance.stop();
                 if (example != null)

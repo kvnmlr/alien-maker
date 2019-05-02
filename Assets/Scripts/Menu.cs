@@ -11,7 +11,13 @@ namespace AlienMaker
         private int numButtons;
         private List<Settings.GameSetup> setups;
 
-        public void initializeButtons()
+        public void ResetSeletion()
+        {
+            currentSelected = 0;
+            UpdateButtons();
+        }
+
+        public void InitializeButtons()
         {
             // Hide all buttons
             foreach (Button button in buttons)
@@ -31,14 +37,12 @@ namespace AlienMaker
                     buttons[i].gameObject.SetActive(true);
                 }
             }
-
-           
         }
 
         public void Start()
         {
             currentSelected = 0;
-            buttons[currentSelected].gameObject.GetComponent<Image>().color = new Color(30/256.0f, 80 / 256.0f, 180 / 256.0f);
+            buttons[currentSelected].gameObject.GetComponent<Image>().color = new Color(256.0f / 256.0f, 256.0f / 256.0f, 256.0f / 256.0f);
         }
 
         public void Update()
@@ -50,17 +54,28 @@ namespace AlienMaker
 
             if (Input.GetKeyUp(KeyCode.DownArrow))
             {
-                buttons[currentSelected].gameObject.GetComponent<Image>().color = new Color(20 / 256.0f, 20 / 256.0f, 20 / 256.0f);
                 currentSelected = (currentSelected + 1) % setups.Count;
-                buttons[currentSelected].gameObject.GetComponent<Image>().color = new Color(30 / 256.0f, 80 / 256.0f, 180 / 256.0f);
+                UpdateButtons();
             }
 
             if (Input.GetKeyUp(KeyCode.Return))
             {
-                Debug.Log(Manager.Instance.currentSetupFinished);
                 Manager.Instance.startGame(setups[currentSelected].id);
             }
         }
 
+        private void UpdateButtons()
+        {
+            for (int i = 0; i < buttons.Length; ++i)
+            {
+                if (i == currentSelected)
+                {
+                    buttons[i].gameObject.GetComponent<Image>().color = new Color(256.0f / 256.0f, 256.0f / 256.0f, 256.0f / 256.0f);
+                } else
+                {
+                    buttons[i].gameObject.GetComponent<Image>().color = new Color(100 / 256.0f, 100 / 256.0f, 100 / 256.0f);
+                }
+            }
+        }
     }
 }

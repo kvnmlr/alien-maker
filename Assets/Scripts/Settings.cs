@@ -66,7 +66,7 @@ namespace AlienMaker
             }
             
 
-            Menu.Instance.initializeButtons();
+            Menu.Instance.InitializeButtons();
         }
     }
 }
