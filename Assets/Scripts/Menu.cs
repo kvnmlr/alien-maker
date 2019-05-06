@@ -56,6 +56,7 @@ namespace AlienMaker
             {
                 currentSelected = (currentSelected + 1) % setups.Count;
                 UpdateButtons();
+                SoundManager.Instance.playOpen();
             }
 
             if (Input.GetKeyUp(KeyCode.Return))

@@ -330,7 +330,8 @@ namespace AlienMaker
             yield return new WaitForSeconds(3);
 
             SoundManager.Instance.playFile("Sounds/" + setup.audio);
-            yield return new WaitForSeconds(3);
+            // yield return new WaitForSeconds(3);
+            yield return new WaitForSeconds(24);
             nextTask();
         }
 
