@@ -397,10 +397,12 @@ namespace AlienMaker
             QRarea.SetActive(true);
             foreach (Part p in parts)
             {
-                p.showColored(false);
+                //p.showColored(false);
             }
             yield return new WaitForSeconds(0.1f);
-            StartCoroutine(TakeScreenshot());
+            ScreenshotCamera.SetActive(false);
+            regularCamera.SetActive(true);
+            //StartCoroutine(TakeScreenshot());
         }
 
         private IEnumerator TakeScreenshot()
@@ -425,7 +427,7 @@ namespace AlienMaker
             tex.ReadPixels(new Rect(0, 0, width, height), 0, 0);
             tex.Apply();
 
-            StartCoroutine(UploadScreenshot(System.Convert.ToBase64String(tex.EncodeToJPG(100))));
+            //StartCoroutine(UploadScreenshot(System.Convert.ToBase64String(tex.EncodeToJPG(100))));
             Destroy(tex);
         }
 
